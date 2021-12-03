@@ -1,21 +1,29 @@
 {% macro generate_database_name(custom_database_name=none, node=none) -%}
 
     {%- set default_database = target.database -%}
-    {%- if ((custom_database_name is none) AND (target.name <> 'QA')) -%}
+    {%- if custom_database_name is none -%}
 
-        {{ default_database }}
+        {%- if target.name == 'QA' -%}
 
-    {%- elif ((target.name == 'QA') AND (custom_database_name is none)) -%}
+            {{ default_database }}_QA
 
-        {{ default_database }}_QA
+        {%- else -%}
 
-    {%- elif ((target.name == 'QA') AND (custom_database_name is NOT none)) -%}
+            {{ default_database }}
 
-        {{ custom_database_name | trim }}_QA    
+        {%- endif -%}
 
     {%- else -%}
 
-        {{ custom_database_name | trim }}
+        {%- if target.name == 'QA' -%}
+
+            {{ custom_database_name | trim }}_QA 
+
+        {%- else -%}
+
+            {{ custom_database_name | trim }}
+
+        {%- endif -%}
 
     {%- endif -%}
 
