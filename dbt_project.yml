@@ -41,5 +41,5 @@ models:
 
           materialized: view
 
-          +database: DBT_TEST_DB
+          +database: BOOTCAMP_DB
           +schema: 'demo_dbt'
