@@ -41,5 +41,5 @@ models:
 
           materialized: view
 
-          
+
           +schema: 'demo_dbt'
