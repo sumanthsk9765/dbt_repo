@@ -2,16 +2,31 @@
 
     {%- set default_database = target.database -%}
     {%- if custom_database_name is none -%}
+        {%- if target.name == 'QA' -%}
 
-        {{ default_database }}
+            {{ default_database }}_QA
 
-    {%- elif target.name == 'QA' -%}
+        {%- else -%}
 
-        {{ custom_database_name | trim }}_QA
+            {{ default_database }}
+
+        {%- endif -%}
+
+
 
     {%- else -%}
 
-        {{ custom_database_name | trim }}
+        {%- if target.name == 'QA' -%}
+
+            {{ custom_database_name | trim }}_QA
+
+        {%- else -%}
+
+            {{ custom_database_name | trim }}
+
+        {%- endif -%}
+
+        
 
     {%- endif -%}
 
